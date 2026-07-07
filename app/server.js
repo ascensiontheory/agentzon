@@ -117,6 +117,7 @@ async function getAgents() {
       earnings: n(r.account.totalEarnings),
       staked: n(r.account.stakedAmount),
       status: enumKey(r.account.status),
+      registeredAt: Number(r.account.registeredAt),
     }));
   });
 }

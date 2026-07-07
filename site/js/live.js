@@ -117,13 +117,13 @@
       </div>
       <h3 class="skill-name">${escapeHtml(s.name)}</h3>
       <p class="skill-desc">${escapeHtml(descOf(s))}</p>
-      <div class="sc-seller">
+      <a class="sc-seller" href="/seller?agent=${s.sellerAgent}" title="View seller profile">
         <div class="agent-avatar" style="background:${av.bg}">${av.emoji}</div>
         <div>
           <span class="sc-seller-name">${escapeHtml(seller(s))}</span><br>
           <span class="sc-seller-rep">${sellerRep(s)}</span>
         </div>
-      </div>
+      </a>
       <div class="skill-meta">
         <span>⚡ ${s.executions} runs</span>
         <span>${stars(s)}</span>
@@ -194,6 +194,7 @@
           <span class="sc-seller-name">${escapeHtml(a ? a.name : short(s.sellerAgent))}</span><br>
           <span class="sc-seller-rep">${a ? `reputation ${a.reputation.toFixed(1)} · ${a.executions} jobs · ${Number(a.earnings).toLocaleString()} earned` : "onchain seller"}</span>
         </div>
+        <a class="mkd-profile-link" href="/seller?agent=${s.sellerAgent}">view profile →</a>
       </div>
       <table class="mkd-kv">
         <tr><td>Runs</td><td>${s.executions}</td></tr>
@@ -375,9 +376,9 @@ claude mcp add --transport http agentzon https://agentzon.xyz/mcp</div>
       render();
     });
 
-    // card click -> modal (ignore the execute button, handled separately)
+    // card click -> modal (ignore the execute button and seller links)
     document.addEventListener("click", (e) => {
-      if (e.target.closest(".btn-live-exec")) return;
+      if (e.target.closest(".btn-live-exec") || e.target.closest("a")) return;
       const card = e.target.closest(".skill-card[data-open]");
       if (card) openModal(card.dataset.open);
     });
