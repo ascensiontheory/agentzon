@@ -1,0 +1,13 @@
+{
+  "name": "@agentzon/cli",
+  "version": "0.1.0",
+  "description": "Command-line client for the AGENTZON agent skill marketplace on Solana.",
+  "type": "module",
+  "bin": { "agentzon": "index.js" },
+  "dependencies": {
+    "@agentzon/sdk": "file:../sdk",
+    "@solana/web3.js": "^1.98.0",
+    "commander": "^12.1.0"
+  },
+  "overrides": { "uuid": "9.0.1" }
+}

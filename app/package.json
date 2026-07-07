@@ -1,0 +1,22 @@
+{
+  "name": "agentzon-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AGENTZON backend — reads live on-chain state from the devnet programs and serves JSON to the site.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.31.1",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@solana/spl-token": "^0.4.9",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "zod": "^3.24.0"
+  },
+  "overrides": {
+    "uuid": "9.0.1"
+  }
+}

@@ -1,0 +1,947 @@
+{
+  "address": "rrQYPhuygZ6VkV37F7KmiHAjagf3k6m7CqjyEmkFV3J",
+  "metadata": {
+    "name": "registry",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "docs": [
+    "AGENTZON Registry — agent & skill registration, reputation.",
+    "Devnet build. Companion to the Escrow program (payments) and Governance (staking/voting)."
+  ],
+  "instructions": [
+    {
+      "name": "delist_skill",
+      "docs": [
+        "Delist a skill (operator only). Existing escrows remain valid."
+      ],
+      "discriminator": [
+        116,
+        78,
+        220,
+        5,
+        38,
+        170,
+        16,
+        192
+      ],
+      "accounts": [
+        {
+          "name": "agent",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  103,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "operator"
+              }
+            ]
+          }
+        },
+        {
+          "name": "skill",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  107,
+                  105,
+                  108,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "agent"
+              },
+              {
+                "kind": "account",
+                "path": "skill.skill_id",
+                "account": "SkillAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "operator",
+          "signer": true,
+          "relations": [
+            "agent"
+          ]
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize",
+      "docs": [
+        "One-time protocol config (singleton PDA). Sets authority, treasury, and the $AGENTZON mint."
+      ],
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "treasury",
+          "type": "pubkey"
+        },
+        {
+          "name": "agentzon_mint",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "list_skill",
+      "docs": [
+        "List a skill under the caller's agent. PDA seeds [\"skill\", agent, skill_id]."
+      ],
+      "discriminator": [
+        247,
+        246,
+        237,
+        238,
+        50,
+        56,
+        112,
+        182
+      ],
+      "accounts": [
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "agent",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  103,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "operator"
+              }
+            ]
+          }
+        },
+        {
+          "name": "skill",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  107,
+                  105,
+                  108,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "agent"
+              },
+              {
+                "kind": "arg",
+                "path": "skill_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "operator",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "agent"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "skill_id",
+          "type": {
+            "array": [
+              "u8",
+              16
+            ]
+          }
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "price",
+          "type": "u64"
+        },
+        {
+          "name": "category",
+          "type": {
+            "defined": {
+              "name": "SkillCategory"
+            }
+          }
+        },
+        {
+          "name": "schema_uri",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "register_agent",
+      "docs": [
+        "Register an agent. PDA is one-per-operator: seeds [\"agent\", operator]."
+      ],
+      "discriminator": [
+        135,
+        157,
+        66,
+        195,
+        2,
+        113,
+        175,
+        30
+      ],
+      "accounts": [
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "agent",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  103,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "operator"
+              }
+            ]
+          }
+        },
+        {
+          "name": "operator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "agent_id",
+          "type": {
+            "array": [
+              "u8",
+              16
+            ]
+          }
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "metadata_uri",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "update_agent",
+      "docs": [
+        "Update an agent's off-chain metadata URI (operator only)."
+      ],
+      "discriminator": [
+        85,
+        2,
+        178,
+        9,
+        119,
+        139,
+        102,
+        164
+      ],
+      "accounts": [
+        {
+          "name": "agent",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  103,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "operator"
+              }
+            ]
+          }
+        },
+        {
+          "name": "operator",
+          "signer": true,
+          "relations": [
+            "agent"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "metadata_uri",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "update_reputation",
+      "docs": [
+        "Protocol-authority hook: called after an execution completes to update",
+        "reputation, lifetime counters, and (optionally) a 1-5 star rating."
+      ],
+      "discriminator": [
+        194,
+        220,
+        43,
+        201,
+        54,
+        209,
+        49,
+        178
+      ],
+      "accounts": [
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "agent",
+          "writable": true
+        },
+        {
+          "name": "skill",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "execution_success",
+          "type": "bool"
+        },
+        {
+          "name": "rating",
+          "type": {
+            "option": "u8"
+          }
+        },
+        {
+          "name": "earnings",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "update_skill",
+      "docs": [
+        "Update price / status of a listed skill (operator only)."
+      ],
+      "discriminator": [
+        116,
+        142,
+        164,
+        86,
+        9,
+        27,
+        112,
+        227
+      ],
+      "accounts": [
+        {
+          "name": "agent",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  103,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "operator"
+              }
+            ]
+          }
+        },
+        {
+          "name": "skill",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  107,
+                  105,
+                  108,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "agent"
+              },
+              {
+                "kind": "account",
+                "path": "skill.skill_id",
+                "account": "SkillAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "operator",
+          "signer": true,
+          "relations": [
+            "agent"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "price",
+          "type": "u64"
+        },
+        {
+          "name": "status",
+          "type": {
+            "defined": {
+              "name": "SkillStatus"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "AgentAccount",
+      "discriminator": [
+        241,
+        119,
+        69,
+        140,
+        233,
+        9,
+        112,
+        50
+      ]
+    },
+    {
+      "name": "Config",
+      "discriminator": [
+        155,
+        12,
+        170,
+        224,
+        30,
+        250,
+        204,
+        130
+      ]
+    },
+    {
+      "name": "SkillAccount",
+      "discriminator": [
+        122,
+        1,
+        17,
+        219,
+        180,
+        43,
+        180,
+        20
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "AgentRegistered",
+      "discriminator": [
+        191,
+        78,
+        217,
+        54,
+        232,
+        100,
+        189,
+        85
+      ]
+    },
+    {
+      "name": "SkillListed",
+      "discriminator": [
+        208,
+        44,
+        218,
+        161,
+        21,
+        136,
+        102,
+        16
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NameTooLong",
+      "msg": "Name exceeds maximum length"
+    },
+    {
+      "code": 6001,
+      "name": "UriTooLong",
+      "msg": "URI exceeds maximum length"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidPrice",
+      "msg": "Price must be greater than zero"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidRating",
+      "msg": "Rating must be between 1 and 5"
+    },
+    {
+      "code": 6004,
+      "name": "AgentNotActive",
+      "msg": "Agent is not active"
+    },
+    {
+      "code": 6005,
+      "name": "Unauthorized",
+      "msg": "Unauthorized"
+    }
+  ],
+  "types": [
+    {
+      "name": "AgentAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "operator",
+            "type": "pubkey"
+          },
+          {
+            "name": "agent_id",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "reputation_score",
+            "type": "u64"
+          },
+          {
+            "name": "total_executions",
+            "type": "u64"
+          },
+          {
+            "name": "total_earnings",
+            "type": "u64"
+          },
+          {
+            "name": "staked_amount",
+            "type": "u64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "AgentStatus"
+              }
+            }
+          },
+          {
+            "name": "registered_at",
+            "type": "i64"
+          },
+          {
+            "name": "metadata_uri",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AgentRegistered",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "agent",
+            "type": "pubkey"
+          },
+          {
+            "name": "operator",
+            "type": "pubkey"
+          },
+          {
+            "name": "agent_id",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "AgentStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Suspended"
+          },
+          {
+            "name": "Deactivated"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Config",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "treasury",
+            "type": "pubkey"
+          },
+          {
+            "name": "agentzon_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_agents",
+            "type": "u64"
+          },
+          {
+            "name": "total_skills",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkillAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "seller_agent",
+            "type": "pubkey"
+          },
+          {
+            "name": "skill_id",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "price",
+            "type": "u64"
+          },
+          {
+            "name": "category",
+            "type": {
+              "defined": {
+                "name": "SkillCategory"
+              }
+            }
+          },
+          {
+            "name": "schema_uri",
+            "type": "string"
+          },
+          {
+            "name": "execution_count",
+            "type": "u64"
+          },
+          {
+            "name": "total_rating",
+            "type": "u64"
+          },
+          {
+            "name": "rating_count",
+            "type": "u64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "SkillStatus"
+              }
+            }
+          },
+          {
+            "name": "listed_at",
+            "type": "i64"
+          },
+          {
+            "name": "updated_at",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkillCategory",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "MarketAnalysis"
+          },
+          {
+            "name": "Content"
+          },
+          {
+            "name": "Trading"
+          },
+          {
+            "name": "Development"
+          },
+          {
+            "name": "Data"
+          },
+          {
+            "name": "Other"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkillListed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "skill",
+            "type": "pubkey"
+          },
+          {
+            "name": "agent",
+            "type": "pubkey"
+          },
+          {
+            "name": "skill_id",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "price",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkillStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Listed"
+          },
+          {
+            "name": "Delisted"
+          },
+          {
+            "name": "Suspended"
+          }
+        ]
+      }
+    }
+  ]
+}
