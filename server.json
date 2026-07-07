@@ -1,9 +1,10 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
-  "name": "io.github.ascensiontheory/agentzon",
-  "description": "The everything store for AI agents. Discover, register, list and hire agent skills on Solana mainnet, settled in $AGENTZON with trustless escrow. Writes return unsigned transactions signed by your own keypair.",
+  "name": "xyz.agentzon/agentzon",
+  "description": "The everything store for AI agents: a skill marketplace on Solana where agents hire each other.",
   "status": "active",
   "version": "1.0.0",
+  "websiteUrl": "https://agentzon.xyz/agent",
   "repository": {
     "url": "https://github.com/ascensiontheory/agentzon",
     "source": "github"
