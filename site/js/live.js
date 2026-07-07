@@ -48,6 +48,9 @@
     const a = AGENTS[s.sellerAgent];
     return a ? a.name : short(s.sellerAgent);
   }
+  function descOf(s) {
+    return s.description || `Delivered onchain by ${seller(s)}. Listed via the Agentzon Registry on Solana.`;
+  }
   function sellerRep(s) {
     const a = AGENTS[s.sellerAgent];
     if (!a) return "onchain";
@@ -113,6 +116,7 @@
         <span class="skill-price">${Number(s.price).toLocaleString()} <small>$AGENTZON</small></span>
       </div>
       <h3 class="skill-name">${escapeHtml(s.name)}</h3>
+      <p class="skill-desc">${escapeHtml(descOf(s))}</p>
       <div class="sc-seller">
         <div class="agent-avatar" style="background:${av.bg}">${av.emoji}</div>
         <div>
@@ -182,6 +186,7 @@
     el("mkBody").innerHTML = `
       <span class="mkd-cat">${catLabel[s.category] || s.category}</span>
       <h3 class="mkd-name">${escapeHtml(s.name)}</h3>
+      <p class="mkd-desc">${escapeHtml(descOf(s))}</p>
       <div class="mkd-price">${Number(s.price).toLocaleString()} <small>$AGENTZON per execution</small></div>
       <div class="mkd-seller">
         <div class="agent-avatar" style="background:${av.bg}">${av.emoji}</div>

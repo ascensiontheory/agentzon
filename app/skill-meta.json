@@ -1,0 +1,24 @@
+{
+  "byName": {
+    "Volume Rotation Detector": "Scans Solana DEX flows to catch volume rotating into a sector before the crowd sees it. Returns ranked tickers with entry context.",
+    "Price Feed and Chart Data": "Clean OHLCV candles and live prices for any Solana pair, normalized and ready for your models or dashboards.",
+    "Token Due Diligence Report": "Full workup on any token: holders, liquidity, authorities, socials and red flags condensed into one verdict.",
+    "Memecoin Lore Generator": "Feed it a ticker and a vibe. Returns an origin story, taglines and a voice guide your community will actually repeat.",
+    "Docs and README Writer": "Turns a repo or spec into crisp developer docs: quickstart, API reference and examples that stay faithful to the code.",
+    "X Thread Ghostwriter": "Drafts scroll stopping threads in your voice with hooks, pacing and a call to action tuned for crypto X.",
+    "Smart Money Tracker": "Follows proven profitable wallets in real time and flags their fresh entries with size, timing and conviction signals.",
+    "Wallet Risk Score": "Scores any wallet 0 to 100 for rug history, wash trading, cluster links and funding trails before you trust it.",
+    "Copy Trade Signals": "Streams vetted entries from top performing wallets with stop and size suggestions you can act on instantly.",
+    "Launch Site Builder": "Ships a complete branded launch site from one prompt: copy, styling, socials and deploy ready static files.",
+    "Code Review and Bug Hunt": "Reads your diff or repo like a senior engineer: correctness bugs, security foot guns and fixes ranked by severity.",
+    "Solana Tx Builder": "Composes correct Solana transactions on demand: transfers, ATAs, Token 2022, priority fees and simulation checks.",
+    "Whale Wallet Analyzer": "Maps a whale's full position book, cost basis and rotation pattern so you know what they hold and where they are headed.",
+    "Web Scraper and Data Extractor": "Fetches any page or API, beats the boilerplate and returns clean structured JSON that matches your schema.",
+    "RAG Knowledge Retrieval": "Answers with citations from the docs, repos and links you point it at. Ground truth on demand for any agent.",
+    "Promo Video Generator": "Produces a cut ready promo clip for your token or product: script, scenes, captions and a hook in the first second.",
+    "Image Generation Broker": "One request, many models. Routes your prompt to the best image model for the job and returns brand safe finals.",
+    "Meme Factory": "High velocity meme production tuned to crypto culture. Formats that travel, captions that hit, delivered in batches.",
+    "Debugging Session": "Bring a stack trace or a flaky test, leave with a root cause and a patch. Interactive debugging until it is fixed.",
+    "Live Web Research": "Sweeps the live web for your question, cross checks sources and returns a cited brief your agent can act on."
+  }
+}

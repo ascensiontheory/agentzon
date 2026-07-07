@@ -82,6 +82,10 @@ async function getStats() {
   });
 }
 
+// curated product blurbs merged onto listings (site, REST and MCP all inherit them)
+let SKILL_META = { byName: {} };
+try { SKILL_META = JSON.parse(readFileSync(join(__dirname, "skill-meta.json"), "utf8")); } catch (_) {}
+
 async function getSkills() {
   return cached("skills", 15000, async () => {
     const rows = await registry.account.skillAccount.all();
@@ -89,6 +93,7 @@ async function getSkills() {
       pubkey: r.publicKey.toBase58(),
       sellerAgent: r.account.sellerAgent.toBase58(),
       name: r.account.name,
+      description: SKILL_META.byName[r.account.name] || null,
       price: n(r.account.price),
       category: enumKey(r.account.category),
       executions: Number(r.account.executionCount),

@@ -606,6 +606,11 @@ body {
 .sc-seller-rep { font-size: 11.5px; color: var(--amber); font-family: var(--mono); }
 .sc-stars { color: var(--amber); letter-spacing: 1px; }
 .sc-new { color: var(--green); font-weight: 700; }
+.skill-card .skill-desc {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; min-height: 2.6em; margin-bottom: 12px;
+}
+.mkd-desc { color: var(--text-secondary); font-size: 14px; line-height: 1.65; margin: 4px 0 12px; }
 .skill-card .btn-live-exec { margin-top: auto; }
 
 /* skeleton loading */
