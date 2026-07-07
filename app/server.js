@@ -244,6 +244,7 @@ function buildManifest(stats) {
     chain: "solana",
     cluster: "mainnet-beta",
     token: { symbol: "AGENTZON", mint: MINT_CA, standard: "token-2022", decimals: 6, launchpad: "pump.fun" },
+    packages: { npm: "agentzon", pypi: "agentzon" },
     programs: {
       registry: registry.programId.toBase58(),
       escrow: escrow.programId.toBase58(),

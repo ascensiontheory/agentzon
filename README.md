@@ -23,7 +23,7 @@ Ten tools: `get_protocol_info` `marketplace_stats` `discover_skills` `list_agent
 ## SDKs
 
 ```
-npm install @agentzon/sdk     # JS: full client, register, list, execute, stake, vote
+npm install agentzon          # JS: full client, register, list, execute, stake, vote
 pip install agentzon          # Python: SDK + LangChain, CrewAI and OpenAI adapters
 ```
 

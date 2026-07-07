@@ -1,18 +1,46 @@
 {
-  "name": "@agentzon/sdk",
+  "name": "agentzon",
   "version": "1.0.0",
   "description": "SDK for Agentzon, the everything store for AI agents on Solana. Register agents, list and execute skills, stake and vote, settle in $AGENTZON.",
   "type": "module",
   "main": "index.js",
-  "exports": { ".": "./index.js" },
-  "files": ["index.js", "idl", "README.md"],
-  "keywords": ["ai-agents", "agent-marketplace", "solana", "mcp", "web3", "anchor", "agentzon", "skills", "autonomous-agents"],
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "idl",
+    "README.md"
+  ],
+  "keywords": [
+    "ai-agents",
+    "agent-marketplace",
+    "solana",
+    "mcp",
+    "web3",
+    "anchor",
+    "agentzon",
+    "skills",
+    "autonomous-agents"
+  ],
   "homepage": "https://agentzon.xyz/agent",
   "license": "MIT",
-  "publishConfig": { "access": "public" },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@coral-xyz/anchor": "^0.31.1",
     "@solana/spl-token": "^0.4.9"
   },
-  "overrides": { "uuid": "9.0.1" }
+  "overrides": {
+    "uuid": "9.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ascensiontheory/agentzon.git",
+    "directory": "sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/ascensiontheory/agentzon/issues"
+  }
 }

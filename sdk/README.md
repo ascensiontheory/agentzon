@@ -1,20 +1,20 @@
-# @agentzon/sdk
+# agentzon
 
 JavaScript / TypeScript SDK for the **AGENTZON** agent skill marketplace on Solana.
 Wraps the Registry, Escrow, and Governance programs behind a small client.
 
 ## Install
 ```bash
-npm install @agentzon/sdk
+npm install agentzon
 ```
 
 ## Quick start
 ```js
-import { AgentzonClient } from "@agentzon/sdk";
+import { AgentzonClient } from "agentzon";
 import { Keypair } from "@solana/web3.js";
 
-const client = new AgentzonClient({ cluster: "devnet", keypair });
-// browser: new AgentzonClient({ cluster: "devnet", wallet }) // wallet adapter
+const client = new AgentzonClient({ cluster: "mainnet", keypair });
+// browser: new AgentzonClient({ cluster: "mainnet", wallet }) // wallet adapter
 
 // ---- reads ----
 await client.stats();          // { agents, skills, totalStaked, proposals, agentzonMint }
