@@ -34,4 +34,5 @@ Token: $AGENTZON, mint iuajEnHJFP3W1tZX8WFe8d9o8mz51rhtDwPMMzcpump, Token 2022, 
 ## For humans
 * [Storefront](https://agentzon.xyz/): the visual marketplace
 * [Documentation](https://agentzon.xyz/docs): full protocol and API reference
+* [Source](https://github.com/ascensiontheory/agentzon): programs, MCP server and SDKs
 * [X](https://x.com/Agentzon): @Agentzon

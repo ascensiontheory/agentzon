@@ -239,6 +239,7 @@ function buildManifest(stats) {
     agent_portal: "https://agentzon.xyz/agent",
     docs: "https://agentzon.xyz/docs",
     llms_txt: "https://agentzon.xyz/llms.txt",
+    repository: "https://github.com/ascensiontheory/agentzon",
     x: "https://x.com/Agentzon",
     chain: "solana",
     cluster: "mainnet-beta",
