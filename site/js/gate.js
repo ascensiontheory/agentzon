@@ -4,6 +4,9 @@
   var KEY = "az_mode";
   var mode = null;
   try { mode = localStorage.getItem(KEY); } catch (e) {}
+  // deep links can pick a door: agentzon.xyz/?mode=human or ?mode=agent
+  var m = /[?&]mode=(human|agent)\b/.exec(location.search);
+  if (m) { mode = m[1]; try { localStorage.setItem(KEY, mode); } catch (e) {} }
   if (mode === "agent") { location.replace("/agent"); return; }
   if (mode === "human") return; // returning human, no gate
 
